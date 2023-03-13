@@ -65,7 +65,7 @@ dist - keeps the files minified
 npx parcel build index.html - creates production build
 npx parcel index.html - create development build
 
-== Parcel Features/why REACT fast? ==
+**`Parcel Features/why REACT fast`**
 
 1. HMR
 2. File watcher
@@ -83,7 +83,7 @@ npx parcel index.html - create development build
 14. Zero configuration
 15. Transitive dependencies - bundlers depending on different bundlers
 16. Created server
-17. Tree shaking
+17. Tree shaking - removing unwanted code. Parcel does this for us
 
 browsersList in package.json - We can choose the browser versions on which our app should work
 

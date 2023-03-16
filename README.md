@@ -55,13 +55,15 @@ e) Maintainability
 f) Reusability
 
 **'JSX Expression '**
-```(
+```
+(
 <>
 
    <h1>JSX</h1>
    <h2>inside JSX</h2>
    </>
-)```
+)
+```
 
 **'React Element'**
 ```const header = (

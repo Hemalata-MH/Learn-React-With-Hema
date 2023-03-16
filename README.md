@@ -1,94 +1,149 @@
-# Learn-React-With-Hema - chapter 02 igniting our app
+# Learn-React-With-Hema - chapter 03 laying the foundation
 
 my learnings
 
-1. 3 ways to inject react in our application
-   a) via CDN as done in the chapter 01 inception-namaste-react
-   b) via create-react-app
-   c) via installing bundlers
+What is **`Babel ?`**
+Babel is the transpiler/compiler, basically JS code that takes piece of some JS code & converts into browser readable code.
 
-What are BUNDLERS : used to optimise our app. Bundler is a package & package is a piece of code written by some developer.
+<ins>npx parcel index.html</ins> is used to run our application. But again this commands can be made shorthanded like <ins>npm run start/npm start</ins>
 
-1. Webpack is a bundler, which is used in the create-react-app,
-2. parcel is another bundler which will be used in our project &
-3. vite
+**'We need to create scripts inside package.json file. Just as below`**
+"scripts": {
+"start" : "parcel index.html",
+"test": "jest"
+},
 
-To install package we need package manager. For which we can use either npm or yarn
-npm does not stand for node package manager. In the official website of https://www.npmjs.com/ no where it is mentioned that npm stands for node package manager
+**'To remove console logs from the app which parcel does not do this for us automatically, we need to follow below steps'**
 
-Steps to install npm package
+1. install babel plugin transform remove console plugin from https://www.npmjs.com/package/babel-plugin-transform-remove-console
 
-1. npm init or npm init -y (when -y is used it skips lots of options as package name, version, description & many more). Hence lets not skip this option & run npm install in the vs code terminal.
+npm install babel-plugin-transform-remove-console --save-dev
 
-Note : After above steps, package.json file will be created in our application. package.json is the configuration file needed by the npm package to run itself
+2. configure above plugin in the .babelrc file which is manually created
+   {
+   "plugins": [ ["transform-remove-console", { "exclude": [ "error", "warn"] }] ]
+   }
 
-Why npm package in our applicaion ?
-Because npm consists of packages those are used to run our react application
+console's with error & warn will be displayed & console.log, console.table and others will be removed which are not included in the `exclude` field
 
-Steps to install parcel - https://parceljs.org/
+`Note` whenever there is a siblings/children in the root elements or any components then `key` as a prop should be given as below
 
-1. npm install -D parcel
-   (-D means devdependency. -D means we are installing parcel on developers machine as we don't won't this to be installed on the production machine. npm install --save-dev & npm install -D parcel does the same thing)
+var h1 = React.createElement('h1', {key: 'h1'}, 'hello from h1');
 
-   A) package-lock.json file
+var h2 = React.createElement('h2', {key : 'h2'}, 'hello from h2');
 
-   1. is created which specifies the exact version which is mainly used for production build basically package-lock.json file locks the version
-   2. Never keep package-lock.json in .gitignore
+var div = React.createElement('div', {}, [h1,h2]);
 
-   B) In the package.json file devDependency is added with parcel & it's version. The version has 3 variants
+`key` is the unique identifier
 
-   1. caret (^) e:g "parcel": "^2.8.3" - which updates the parcel with minor version auto & the exact version is locked in the package-lock.json
-   2. tilde (~) e:g "parcel": "~2.8.3" - which updates the parcel with major version auto & the exact version is locked in the package-lock.json
-   3. nothing e:g "parcel": "2.8.3" - sticks to specified version
+**'KEY RECONCILIATION'** changes specific DOM element when `key` prop is used. This means when there is a code change the entire DOM do not have to update instead only the changed element. This is mostly used for performance optimization. Read - https://reactjs.org/docs/reconciliation.html
 
-   C) node_modules folder got created in our app.
+_There are 2 ways to create elements in React_
 
-   1. node_module is like a database for the npm. If anything is installed in our react app that sits down in the node_modules folder
-   2. node_modules should be kept in the .gitignore
+1. using React.createElement - but creating children/nested elements becomes a huge mess hence JSX is prefered.
+2. JSX - HTML like syntax in React & not HTML inside JS
 
-Now let's get rid of react CDN links & install react package in our application
+`createElement ==> Object ==> HTML(DOM)`
+`JSX ==> createElement ==> Object ==> HTML(DOM)`
 
-1. npm install react
-2. npm install react-dom
+**'Advantages of JSX'**
+a) Human readable format
+b) Syntactical sugar
+c) Developer friendly
+d) Less code
+e) Maintainability
+f) Reusability
 
-Let's run our application using - npx parcel index.html.
+**'JSX Expression '**
+(
+<>
 
-1. This means our application will exceute parcel with the index.html as entry point
-2. Running this command for the first time will provide new server (http://localhost:1234) where our application will be run
-3. Two new folders will be created - parcel-cache & dist
-4. Now import React from react & ReactDOM from react-dom/clients
+   <h1>JSX</h1>
+   <h2>inside JSX</h2>
+   </>
+)
 
-parcel-cache - parcel requires some space to perform HMR, minification of files, removing consoles, filw watching & many more hence this is the folder created by parcel on it's own
+**'React Element'**
+const header = (
+<>
 
-dist - keeps the files minified
+   <h1>JSX</h1>
+   <h2>inside JSX</h2>
+   </>
+)
 
-npx parcel build index.html - creates production build
-npx parcel index.html - create development build
+`Render React Element`
+root.render(header)
 
-== Parcel Features/why REACT fast? ==
+**'2 Types of Components'** - functions returning soe piece of JS code/JSX/React element
+a. Functional Component - new way of writing components. It's a normal JS function
+b. Class Based Component - old way of writing components
 
-1. HMR
-2. File watcher
-3. File minification
-4. Image optimization
-5. Clean development code
-6. Manages development & production build
-7. Super fast build algorithm
-8. Bundling
-9. Caching while development
-10. Compatible with older browser versions
-11. HTTPS on development build - using npx parcel index.html --https
-12. Manages port numbers
-13. Consistent Hashing Algorithm
-14. Zero configuration
-15. Transitive dependencies - bundlers depending on different bundlers
-16. Created server
-17. Tree shaking
+Functional/Class component starts with capital letter as below:
+var HeaderComponent = () => {
+return (
 
-browsersList in package.json - We can choose the browser versions on which our app should work
+<div>
+  <h1>Header component</h1>
+</div>
+)
+}
 
-References :-
+return can also be omitted as below
+var HeaderComponent = () => (
 
-1. https://parceljs.org/features/development/
-2. https://browserslist.dev/?q=bGFzdCAyIHZlcnNpb25z
-3. https://parceljs.org/getting-started/webapp/
+<div>
+  <h1>Header component</h1>
+  </div>
+)
+
+`Render React Component`
+root.render(<HeaderComponent/>)
+
+**'Nesting React Element inside React Component'**
+var header = (
+
+  <div>
+  <h1> I am header element </h1>
+  </div>
+)
+
+var HeaderComponent = () => {
+return (
+
+<div>
+{header}
+<h1> I am a functional component </h1>
+</div>
+)
+}
+
+**'Nesting React Component inside React Component'**
+This is also known as component composition
+
+var Header = () => {
+
+  <div>
+  <h1> I am header component </h1>
+  </div>
+}
+
+var HeaderComponent = () => {
+return (
+
+<div>
+<Header/> `or` {Header()}
+<h1> I am a functional component </h1>
+</div>
+)
+}
+
+`JSX takes care of cross-side scripting attack (XSS) which means our JS code is safe because JSX sanitizes our JS code/data`
+
+References :
+
+1. https://reactjs.org/docs/react-without-jsx.html
+2. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+3. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-type
+4. https://babeljs.io/
+5. https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=Q&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.21.2&externalPlugins=&assumptions=%7B%7D

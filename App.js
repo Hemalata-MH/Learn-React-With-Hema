@@ -1,31 +1,35 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 
-var header1 = React.createElement(
+/**
+ * This is react element
+ * var header1 = React.createElement(
   "h1",
   {
     key: "heading1",
   },
   "ReactJS - Learn React With Hema"
 );
+*/
 
-var header2 = React.createElement(
-  "h2",
-  {
-    key: "heading2",
-  },
-  "I am header 2"
+// This is JSX
+const Header = () => (
+  <div>
+    <h1 key="h1">JSX</h1>
+    <h3>inside JSX</h3>
+  </div>
 );
 
-var container = React.createElement(
-  "div",
-  {
-    id: "container",
-    key: "container",
-  },
-  [header1, header2]
-);
+// This is React functional Component
+const HeaderComponent = () => {
+  return (
+    <div>
+      {1 + 2}
+      <Header />
+      <h2>I am inside react functional component</h2>
+      <h3>Hello Buddies</h3>
+    </div>
+  );
+};
 
-// console.log(react_header);
 var root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(container);
+root.render(<HeaderComponent />);

@@ -56,21 +56,21 @@ f) Reusability
 
 **'JSX Expression '**
 (
-<>
+`<>
 
    <h1>JSX</h1>
    <h2>inside JSX</h2>
    </>
-)
+)`
 
 **'React Element'**
 const header = (
-<>
+`<>
 
    <h1>JSX</h1>
    <h2>inside JSX</h2>
    </>
-)
+)`
 
 `Render React Element`
 root.render(header)
@@ -80,35 +80,35 @@ a. Functional Component - new way of writing components. It's a normal JS functi
 b. Class Based Component - old way of writing components
 
 Functional/Class component starts with capital letter as below:
-var HeaderComponent = () => {
+`var HeaderComponent = () => {
 return (
 
 <div>
   <h1>Header component</h1>
 </div>
 )
-}
+}`
 
 return can also be omitted as below
-var HeaderComponent = () => (
+`var HeaderComponent = () => (
 
 <div>
   <h1>Header component</h1>
   </div>
-)
+)`
 
 `Render React Component`
-root.render(<HeaderComponent/>)
+`root.render(<HeaderComponent/>)`
 
 **'Nesting React Element inside React Component'**
-var header = (
+`var header = (
 
   <div>
   <h1> I am header element </h1>
   </div>
-)
+)`
 
-var HeaderComponent = () => {
+`var HeaderComponent = () => {
 return (
 
 <div>
@@ -116,19 +116,19 @@ return (
 <h1> I am a functional component </h1>
 </div>
 )
-}
+}`
 
 **'Nesting React Component inside React Component'**
 This is also known as component composition
 
-var Header = () => {
+`var Header = () => {
 
   <div>
   <h1> I am header component </h1>
   </div>
-}
+}`
 
-var HeaderComponent = () => {
+`var HeaderComponent = () => {
 return (
 
 <div>
@@ -136,7 +136,7 @@ return (
 <h1> I am a functional component </h1>
 </div>
 )
-}
+}`
 
 `JSX takes care of cross-side scripting attack (XSS) which means our JS code is safe because JSX sanitizes our JS code/data`
 

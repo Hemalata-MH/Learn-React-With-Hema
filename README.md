@@ -1,99 +1,36 @@
-# Learn-React-With-Hema - chapter 04 talk is cheap show me the code
+# Learn-React-With-Hema - chapter 05 let's get hooked
 
 my learnings
-**Let's Build our app now - App Name is Hema's Kitchen**
 
-`Our app layout will look like below`
+React File Structure - `https://legacy.reactjs.org/docs/faq-structure.html`
 
-1. Header (
-   logo,
-   navbars (
-   home,
-   about us,
-   cart,
-   contact us,
-   )
-   )
-2. Body (
-   seach bar,
-   restuarantlist (
-   restaurantcards (
-   image,
-   name,
-   ratings,
-   etc
-   )
-   )
-   )
-3. Footer (
-   copyrights,
-   links,
-   reference,
-   etc
-   )
+**Exports & Imports**
+There are 2 types of exports - named export & default export
 
-`Note - installing tailwind css so that I can start using it from scratch`
+`Named Export` - **export const Title = () => {}**
+`Named Import` - **import {Title} from "<filepath>";**
 
-**Steps to install tailwindcss**
+Create a component as const Title = () => {} &
+`Default Export` - **export default Title**;
+`Default Import` - **import Title from "<filepath>";**
 
-1. npm install -D tailwindcss postcss - will create a package in node_modules & will also get added to package.json as a dev dependency
-2. npx tailwindcss init - execute tailwind css package so that it's get initialized in our project & generate tailwind.config.js file
-3. create .postcssrc file in the root project & enable tailwindcss plugin as below
-   {
-   "plugins": {
-   "tailwindcss": {}
-   }
-   }
-4. Configure tailwind.config.js file
-5. Add tailwindcss directives to index.css
-6. Build & start your application to witness the changes
+There is another import where we can import all named exports as **import \* as AllExports from "<filepath>";** & same can be accessed as **<AllExports.Title/>** just like how we do for <React.Fragment/>
 
-`React Fragment` is a component imported from React library. It's basically an empty tag which is used to get rid of the parent div which is mandatory to be used while creating JSX. How to write this:
+Created `constant.js(some developers name this config.js)` where we store the global values
 
-```
-<React.Fragment></React.Fragment>
-or
-<></>
-```
+**What are `states`in React**
+Every component in react maintains state which holds particular value
 
-`Inline CSS in React`
+We can use states using **useState** which returns an array that contains 2 elements. The first element is the local state variable name & the second element is the function.
 
-```
-const styleObj = {
-   border : 1px solid black,
-}
+We can do named import to access useState - `import {useState} from "react";`
 
-const jsx = (
-   <div style={styleObj}>
-   <h1>Header</h1>
-   </div>
-)
+**VVI -- The first element is used to store the value & the second element is the function where the local variable value gets updated & the updated value is again stored in the first element**
 
-or
-const jsx = (
-   <div style={{
-   border : 1px solid black,
-}}>
-   <h1>Header</h1>
-   </div>
-)
+e:g - const [searchText, setSearchText] = useState()
 
-```
+To add default value
+**javascript --> const searchText = "something";**
+**React --> const [searchText, setSearchText] = useState("something");**
 
-`props` passing some data into components basically from parent component to child component. It's a shorthand for properties. It just like passing arguments & receiving parameters done in JS.
-
-`VIRTUAL DOM` is a graphical representation of a DOM. React uses `RECONCILIATION` which uses \*\*Diff Algorithm" which make the performance of the application fast. `Diff Algorithm` keeps the track on the changes between the DOM & the Virtual tree & re-renders only that portion.
-
-React uses `KEYS`. This is mainly used to re-render only the changed elements on the browser. The best usage of keys is when there is a same set of tags used so that the reconciliation happens smoothly
-
-`REACT FIBRE` - in react 16 the diff algorithm changed & react introduced reconciliation engine that is _React Fibre_ which internally uses diff algorithm.
-
-**Homework**
-
-1. Why not to use index as a key?
-   A. https://legacy.reactjs.org/docs/lists-and-keys.html
-   https://robinpokorny.com/blog/index-as-a-key-is-an-anti-pattern/
-
-References :-
-
-1. https://github.com/acdlite/react-fiber-architecture
+**Use of state variable** when there is a change to local state variable react will not know & that's why state variable is used as react keeps watching the state variable so that the changed value get's re-rendered on the browser

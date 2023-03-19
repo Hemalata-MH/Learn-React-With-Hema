@@ -2,7 +2,6 @@ import logo from "../assets/img/kitchen-logo.png";
 const Header = () => {
   return (
     <div className="flow-root bg-gray-700 text-white text-center shadow-xl h-[10%]">
-      {/* fixed w-full border border-gray-500 shadow-lg bg-blue-300 */}
       <div className="float-left flex">
         <a href="/">
           <img alt="logo" src={logo} className="w-[5rem]"></img>

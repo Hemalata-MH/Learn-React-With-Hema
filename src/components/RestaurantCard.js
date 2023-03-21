@@ -8,7 +8,7 @@ const RestaurantCard = ({
   deliveryTime,
   costForTwoString,
 }) => (
-  <div className="border border-gray-500 m-9 w-[16%] shadow-2xl rounded-lg ">
+  <div className="border border-gray-500 m-9 w-[17%] shadow-2xl rounded-lg cursor-pointer">
     <div>
       <img
         alt="restaurant-name"
@@ -18,8 +18,10 @@ const RestaurantCard = ({
     </div>
 
     <div className="p-1">
-      <span className="font-bold ">{name}</span>
-      <p className="text-[13px] pt-1 font-semibold">{cuisines.join(",")}</p>
+      <p className="font-bold ">{name}</p>
+      <p className="text-[13px] pt-1 font-semibold inline-block whitespace-nowrap">
+        {cuisines.join(",")}
+      </p>
       <ul className="flex justify-between text-[13px] pt-3">
         <li className="bg-green-500 text-cyan-50">
           <i className="fa-regular fa-star"></i>

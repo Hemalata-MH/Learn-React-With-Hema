@@ -1,36 +1,75 @@
-# Learn-React-With-Hema - chapter 05 let's get hooked
+# Learn-React-With-Hema - chapter 06 exploring the world
 
 my learnings
 
-React File Structure - `https://legacy.reactjs.org/docs/faq-structure.html`
+**Monolith & Micro services**
+_Monolith service works on single page application modal which means all services will use one java project like user authentication, logs, UI, API's, SMS, notifications & many more_
 
-**Exports & Imports**
-There are 2 types of exports - named export & default export
+_Microservices will use different applications like one application for authentication, one for logs, one for Ui, one for APi's & so on. This works on separation of concern which means UI team will work independently need not to worry when & how API team is working, similarly for logs team,authentication team & others.All this applications are integrated using different ports(8080, 8081, 7071,...) & one domain(github.com). Different teck stack can also be used depending on the use-cases like for UI react, API java, notifications golang, sms python & etc_
 
-`Named Export` - **export const Title = () => {}**
-`Named Import` - **import {Title} from "<filepath>";**
+**When will the UI re-render**
 
-Create a component as const Title = () => {} &
-`Default Export` - **export default Title**;
-`Default Import` - **import Title from "<filepath>";**
+1. _One when the states changes_
+2. _when the props changes_
 
-There is another import where we can import all named exports as **import \* as AllExports from "<filepath>";** & same can be accessed as **<AllExports.Title/>** just like how we do for <React.Fragment/>
+**2 ways to make an API call**
 
-Created `constant.js(some developers name this config.js)` where we store the global values
+1. Load the website => make an API call => render the UI
+2. Load the website => render the UI => make an API call => update the UI :- **The best & the recommended way**
 
-**What are `states`in React**
-Every component in react maintains state which holds particular value
+**useEffect** - it's a hook which is used when the component have to be rendered only once or with a given condition by passing a dependency array. This is a named import by react (import {useEffect from "react"})
 
-We can use states using **useState** which returns an array that contains 2 elements. The first element is the local state variable name & the second element is the function.
+When the website is first opened, react will render the page/UI & then the useEffect will be called once
 
-We can do named import to access useState - `import {useState} from "react";`
+e:g
 
-**VVI -- The first element is used to store the value & the second element is the function where the local variable value gets updated & the updated value is again stored in the first element**
+`useEffect()` - takes 2 arguments - callback function & the dependency array
 
-e:g - const [searchText, setSearchText] = useState()
+```
+useEffect(() => {
+    console.log("hello");  // only once the console is printed when the page is loaded/rendered initially
+},[])
 
-To add default value
-**javascript --> const searchText = "something";**
-**React --> const [searchText, setSearchText] = useState("something");**
+useEffect(() => {
+console.log("hello"); // this will print console once when the page is rendered initially/loaded & also each time the search input value is changed
+},[searchText])
 
-**Use of state variable** when there is a change to local state variable react will not know & that's why state variable is used as react keeps watching the state variable so that the changed value get's re-rendered on the browser
+```
+
+**Avoid Rendering Component**
+
+1. Conditional rendering
+   e:g :
+
+```
+return restaurantListsss?.length === 0 ? (
+    <Shimmer />
+  ) : (
+    //UI to be displayed
+  )
+```
+
+2. Early return
+   e:g :
+
+```
+  if (!restaurantListsss) return null; // instead of null we can say <p>No data to display</p>
+```
+
+**Tasks**
+
+1. Show all restaurant lists
+2. Filter the restaurant list based on the search
+3. Early return before rendering the actual UI
+4. Add conditional chaining wherever required
+5. Build login & logout functionality - pending from my end
+
+   **Homework**
+
+6. Optional chaining
+7. Difference between JS statements & expressions
+8. async await - why 2 times await
+
+**References:-**
+
+1. https://react.dev/learn/javascript-in-jsx-with-curly-braces
